@@ -22,6 +22,7 @@ const App = () => {
     }
   ];
 
+  console.log(`App 실행`);
 
   return (
     <>
