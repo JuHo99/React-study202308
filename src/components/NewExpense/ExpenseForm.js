@@ -3,37 +3,38 @@ import './ExpenseForm.css'
 
 const ExpenseForm = () => {
 
-    const [title,setTitle] = useState('');
-    const [price,setPrice] = useState('');
-    const [date,setDate]  =useState('');
+    const [userInput,setUserInput] = useState({title :'',price:'',date:''});
 
     const titleChangeHendler = e =>{
-        setTitle(e.target.value);
-        // console.log(title);
+        setUserInput({
+            ...userInput,
+            title : e.target.value
+        });
     };
     const priceChangeHendler = e =>{
-        setPrice(e.target.value);
+        setUserInput({
+            ...userInput,
+            price:e.target.value
+        });
     };
     const dateChangeHendler = e =>{
-        setDate(e.target.value);
+        setUserInput({
+            ...userInput,
+            date:e.target.value
+        });
     };
 
     const formSubmitHandler = e =>{
         e.preventDefault();
         console.log(`submit 버튼을 누름`);
-        const newExpense = {
-            title,
-            price,
-            date
-        };
 
-        console.log(newExpense);
+        console.log(userInput);
 
-        // 입력창 리셋
-        setTitle('');
-        setPrice('');
-        setDate('');
-
+        setUserInput({
+            title :'',
+            price:'',
+            date:''
+        });
 
     }
 
@@ -45,7 +46,7 @@ const ExpenseForm = () => {
                     <input 
                     type='text' 
                     onChange={titleChangeHendler}
-                    value={title}
+                    value={userInput.title}
                     />
                 </div>
                 <div className='new-expense__control'>
@@ -55,7 +56,7 @@ const ExpenseForm = () => {
                     min='100' 
                     step='100' 
                     onChange={priceChangeHendler}
-                    value={price}
+                    value={userInput.price}
                     />
                 </div>
                 <div className='new-expense__control'>
@@ -65,7 +66,7 @@ const ExpenseForm = () => {
                     min='2019-01-01' 
                     max='2025-12-31' 
                     onChange={dateChangeHendler}
-                    value={date}
+                    value={userInput.date}
                     />
                 </div>
             </div>
