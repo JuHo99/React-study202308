@@ -13,7 +13,7 @@ const App = () => {
     {
       title: "BBQ",
       price: 20000,
-      date: new Date(2023, 5 - 1, 21)
+      date: new Date(2022, 5 - 1, 21)
     },
     {
       title: "도미노피자",

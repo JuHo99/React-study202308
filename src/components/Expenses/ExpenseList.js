@@ -1,10 +1,21 @@
-import React  from 'react';
+import React from 'react';
 import ExpenseItem from './ExpenseItem';
 import './ExpenseList.css';
+import Card from '../UI/Card';
+import ExpenseFilter from './ExpenseFilter';
 
-const ExpenseList = ({items}) => {
+const ExpenseList = ({ items }) => {
+
+    const filterChangeHandler = (selectedYear) => {
+        console.log(selectedYear);
+    }
+
+
     return (
-        <div className="card expenses">
+        <Card className="card expenses">
+
+            <ExpenseFilter onChangeFilterYear={filterChangeHandler} />
+
             <ExpenseItem
                 title={items[0].title}
                 price={items[0].price}
@@ -20,7 +31,7 @@ const ExpenseList = ({items}) => {
                 price={items[2].price}
                 date={items[2].date}
             />
-        </div>
+        </Card>
     )
 }
 
