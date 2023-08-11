@@ -1,14 +1,17 @@
 import React, {useState}  from 'react'
 import './ExpenseForm.css'
 
-const ExpenseForm = () => {
+const ExpenseForm = ({onSaveExpense}) => {
 
     const [userInput,setUserInput] = useState({title :'',price:'',date:''});
 
     const titleChangeHendler = e =>{
-        setUserInput({
-            ...userInput,
-            title : e.target.value
+
+        setUserInput((prevUserInput) =>{
+            return {
+                ...prevUserInput,
+                title:e.target.value
+            };
         });
     };
     const priceChangeHendler = e =>{
@@ -28,7 +31,8 @@ const ExpenseForm = () => {
         e.preventDefault();
         console.log(`submit 버튼을 누름`);
 
-        console.log(userInput);
+        onSaveExpense(userInput);
+        // console.log(userInput);
 
         setUserInput({
             title :'',

@@ -24,9 +24,14 @@ const App = () => {
 
   console.log(`App 실행`);
 
+  // ExpenseForm에 보낼 함수
+  const addExpenseHandler = (newExpense)=>{
+    console.log(newExpense);
+  }
+
   return (
     <>
-    <NewExpense />
+    <NewExpense onAddExpense={addExpenseHandler}/>
     <ExpenseList items={expenses}/>
     </>
   );
