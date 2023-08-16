@@ -1,7 +1,7 @@
 import React, {useState}  from 'react'
 import './ExpenseForm.css'
 
-const ExpenseForm = ({onSaveExpense}) => {
+const ExpenseForm = ({onSaveExpense , onToggle}) => {
 
     const [userInput,setUserInput] = useState({title :'',price:'',date:''});
 
@@ -30,8 +30,16 @@ const ExpenseForm = ({onSaveExpense}) => {
     const formSubmitHandler = e =>{
         e.preventDefault();
         console.log(`submit 버튼을 누름`);
+        
 
-        onSaveExpense(userInput);
+        const newExpense = {
+            id :Math.random(),
+            title : userInput.title,
+            price: userInput.price,
+            date:new Date(userInput.date)
+        }
+
+        onSaveExpense(newExpense);
         // console.log(userInput);
 
         setUserInput({
@@ -39,7 +47,11 @@ const ExpenseForm = ({onSaveExpense}) => {
             price:'',
             date:''
         });
+        onToggle();
+    }
 
+    const cancelInsertHandler = () =>{
+        onToggle();
     }
 
     return (
@@ -75,6 +87,7 @@ const ExpenseForm = ({onSaveExpense}) => {
                 </div>
             </div>
             <div className='new-expense__actions'>
+                <button type='button' onClick={cancelInsertHandler}>Cancel</button>
                 <button type='submit'>Add Expense</button>
             </div>
         </form>
