@@ -7,6 +7,8 @@ import ExpensesChart from './ExpenseChart';
 
 const ExpenseList = ({ items }) => {
 
+  // console.log(`items : `,items);
+
   // 선택된 연도 상태값 관리
   const [filteredYear, setFilteredYear] = useState(new Date().getFullYear().toString());
 
@@ -47,7 +49,7 @@ if (filteredItems.length > 0){
   return (
     <Card className="expenses">
       <ExpenseFilter selected={filteredYear} onChangeFilter={filterChangeHandler} />
-      <ExpensesChart />
+      <ExpensesChart expenses={filteredItems}/>
       {expenseContent}
     </Card>
   );
