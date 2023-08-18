@@ -1,10 +1,10 @@
 import React from 'react'
-import './Card.css'
+import styled from "./Card.module.css";
 
 const Card = ({children,className}) => {
     const madeClass = 'card ' + className;
   return (
-    <div className={madeClass}>
+    <div className={`${styled.card} ${className}`}>
         {children}
     </div>
   )

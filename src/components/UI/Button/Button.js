@@ -26,7 +26,7 @@ import styled from'./Button.module.css';
 const Button = ({ type, onClick, children}) => {
   return (
     <button 
-    type={type} 
+    type={type || 'button'} 
     className={styled.button} 
     onClick={onClick}
     >
