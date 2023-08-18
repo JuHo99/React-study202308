@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import './CourseInput.css'
+import styled from './CourseInput.module.css'
 import Button from '../UI/Button/Button'
 
 const CourseInput = ({onAdd}) => {
@@ -32,7 +32,7 @@ const CourseInput = ({onAdd}) => {
 
   return (
     <form onSubmit={formSubimitHandler}>
-      <div className={`form-control ${!isValid ? 'invalid' : ''}`}>
+      <div className={`${styled['form-control']} ${!isValid && styled.invalid}`}>
         <label>나의 목표</label>
         <input 
         type="text" 
