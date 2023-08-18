@@ -2,14 +2,17 @@ import React, { useState } from 'react';
 import styles from './AddUsers.module.css';
 import Card from '../UI/Card';
 import Button from '../UI/Button/Button';
+import ErrorModal from '../UI/Modal/ErrorModal';
 
 
-const AddUsers = () => {
+const AddUsers = ({onAddUser}) => {
 
   const [userValue, setUserValue] = useState({
     username: '',
     age: ''
   });
+
+  const [error,setError] = useState(null);
 
   const usernameChangeHandler = e => {
     setUserValue(prevUserValue => ({
@@ -30,12 +33,20 @@ const AddUsers = () => {
   const userSubmitHandler = e => {
     e.preventDefault();
     if (userValue.username.trim() === ''||userValue.age.trim()==='') {
+        setError({
+            title:'유효하지 않은 입력값',
+            message:'입력값은 공백으로 작성하시면 안됩니다'
+        });
         return
     }
     if (+userValue.age <1) {
+        setError({
+            title:'유효하지 않은 나이의 범위',
+            message:'나이를 1미만의 숫자로 작성하시면 안됩니다'
+        });
         return
     }
-    console.log(userValue); 
+    onAddUser(userValue);
     setUserValue({
         username:'',
         age:''
@@ -43,6 +54,12 @@ const AddUsers = () => {
   };
 
   return (
+    <>
+    {error && <ErrorModal 
+    title={error.title} 
+    message={error.message}
+     onConfirm={()=>setError(null)}
+     />}
     <Card className={styles.input}>
       <form onSubmit={userSubmitHandler}>
         <label htmlFor="username">이름</label>
@@ -62,6 +79,7 @@ const AddUsers = () => {
         <Button type="submit">가입하기</Button>
       </form>
     </Card>
+    </>
   );
 };
 
