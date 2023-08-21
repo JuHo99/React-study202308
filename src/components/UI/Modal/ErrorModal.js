@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';//포탈 사용을 위한 불러오기
 import Card from '../Card';
 import Button from '../Button/Button';
 import styles from './ErrorModal.module.css';
+import Portal from '../Portal/Portal';
 
 const Backdrop = (onConfirm) => {
   return (
@@ -29,20 +30,13 @@ const ModalOverlay = ({ title, message, onConfirm }) => {
 const ErrorModal = ({ title, message, onConfirm }) => {
   return (
     <>
+      <Portal destId='backdrop-root'>
+        <Backdrop onConfirm={onConfirm} />,
+      </Portal>
 
-      {
-        ReactDOM.createPortal(
-          <Backdrop onConfirm={onConfirm} />,
-          document.getElementById('backdrop-root')
-        )
-      }
-
-      {
-        ReactDOM.createPortal(
-          <ModalOverlay title={title} message={message} onConfirm={onConfirm} />,
-          document.getElementById('overlay-root')
-        )
-      }
+      <Portal destId='overlay-root'>
+        <ModalOverlay title={title} message={message} onConfirm={onConfirm} />,
+      </Portal>
 
     </>
   );
