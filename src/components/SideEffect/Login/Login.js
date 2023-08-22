@@ -5,23 +5,40 @@ import styles from './Login.module.css';
 import Button from '../../UI/Button/Button';
 
 const Login = ({ onLogin }) => {
+  // 이메일 입력값을 저장
   const [enteredEmail, setEnteredEmail] = useState('');
+  // 이메일 입력이 정상적인지 확인
   const [emailIsValid, setEmailIsValid] = useState();
+  // 패스워드 입력값을 저장
   const [enteredPassword, setEnteredPassword] = useState('');
+  // 패스워드 입력이 정상적인 확인
   const [passwordIsValid, setPasswordIsValid] = useState();
+  // 이메일, 패스워드가 둘다 동시에 정상적인 상태인지 확인
   const [formIsValid, setFormIsValid] = useState(false);
 
-  // 입력란을 모두 체크하여 from의 버튼disabled를 해제하는 상태변수
-  // fomIsValid의 사이드 이펙트를 처리하는 영역
-  useEffect(()=>{
-    console.log(`useEffect call in Login.js`);
-    setFormIsValid(
-      enteredEmail.includes('@') && enteredPassword.trim().length > 6
-    );
-  },[enteredEmail,enteredPassword]);//의존성 배열에 상태변수를 넣어주면 상태변수가 set으로 바뀔 때마다 useEffect를 재실행
+
+  // 입력란을 모두 체크하여 form의 버튼 disabled를 해제하는 상태변수
+  // formIsValid의 사이드 이펙트를 처리하는 영역
+  useEffect(() => {
+
+    const timer = setTimeout(() => {
+      console.log('useEffect call in Login.js');
+      setFormIsValid(
+        enteredEmail.includes('@') && enteredPassword.trim().length > 6
+      );
+    }, 1000);
+
+
+    // cleanup 함수 - 컴포넌트가 업데이트되거나 없어지기 전에 실행
+    return () => {
+      console.log('clean up!!');
+      clearTimeout(timer);
+    };
+
+  }, [enteredEmail, enteredPassword]); // 이 배열에 상태변수를 넣어주면 그 상태변수가 바뀔때마다 useEffect를 재실행함
 
   const emailChangeHandler = (e) => {
-    setEnteredEmail(e.target.value);  
+    setEnteredEmail(e.target.value);
   };
 
   const passwordChangeHandler = (e) => {
@@ -73,7 +90,11 @@ const Login = ({ onLogin }) => {
           />
         </div>
         <div className={styles.actions}>
-          <Button type="submit" className={styles.btn} disabled={!formIsValid}>
+          <Button
+            type="submit"
+            className={styles.btn}
+            disabled={!formIsValid}
+          >
             Login
           </Button>
         </div>
