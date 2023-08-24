@@ -1,22 +1,14 @@
-import React from 'react'
-import styles from './Input.module.css'
+import React from "react";
 
-const Input = ({id,label,type,value,isValid,...rest}) => {
-    return (
-        <div
-            className={`${styles.control} ${
-                isValid === false ? styles.invalid : ''
-                }`}
-        >
-            <label htmlFor={id}>{label}</label>
-            <input
-                type={type}
-                id={id}
-                value={value}
-                {...rest}
-            />
-        </div>
-    )
-}
+import styles from './Input.module.scss';
 
-export default Input
+const Input = ({ input, label }) => {
+  return (
+    <div className={styles.input}>
+      <label htmlFor={input.id}>{label}</label>
+      <input {...input} />
+    </div>
+  );
+};
+
+export default Input;
