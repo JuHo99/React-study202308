@@ -3,9 +3,9 @@ import styles from './CartModal.module.scss'
 import Portal from '../Portal/Portal'
 
 
-const Backdrop= ()=>{
+const Backdrop= ({onHide})=>{
     return (
-        <div className={styles.backdrop} />
+        <div className={styles.backdrop} onClick={onHide}/>
     )
 }
 
@@ -17,11 +17,11 @@ const ModalOverlay= ({children})=>{
     )
 }
 
-const CartModal = ({children}) => {
+const CartModal = ({children,onHide: onHide}) => {
   return (
 <>
     <Portal destId='backdrop-root'>
-    <Backdrop/>
+    <Backdrop onHide={onHide}/>
     </Portal>
     <Portal destId='overlay-root'>
     <ModalOverlay>{children}</ModalOverlay>

@@ -18,9 +18,9 @@ const DUMMY_CART=[
 ]
 const {'cart-items':cartItemStyle,total,actions,'button--alt':btnAlt,button} = styles;
 
-const Cart = () => {
+const Cart = ({onHide}) => {
   return (
-    <CartModal>
+    <CartModal onHide={onHide}>
 <ul className={cartItemStyle}>
         {
             DUMMY_CART.map(cartItem=>(
@@ -33,7 +33,7 @@ const Cart = () => {
         <span>58,000원</span>
       </div>
       <div className={actions}>
-        <button className={btnAlt}>닫기</button>
+        <button className={btnAlt} onClick={onHide}>닫기</button>
         <button className={button}>주문</button>
       </div>
     </CartModal>
