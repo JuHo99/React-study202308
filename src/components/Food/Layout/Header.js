@@ -1,11 +1,11 @@
-import React from 'react'
-import styles from './Header.module.scss'
-import mealsImage from '../../../assets/meals.jpg'
+import React from 'react';
+import styles from './Header.module.scss';
+import mealsImage from '../../../assets/meals.jpg';
 import HeaderCartButton from './HeaderCartButton';
 
 const Header = ({onShowCart}) => {
 
-    const {header,'main-image':mainImage} = styles;
+  const { header, 'main-image': mainImage } = styles;
 
   return (
     <>

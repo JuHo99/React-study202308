@@ -1,12 +1,12 @@
 import React from 'react'
-import MealsSummary from './MealsSummaru'
-import AvailableMeals from './Availablemeals'
+import MealsSummary from './MealsSummary'
+import AvailableMeals from './AvailableMeals'
 
 const Meals = () => {
   return (
     <>
-        <MealsSummary/>
-        <AvailableMeals />
+      <MealsSummary />
+      <AvailableMeals />
     </>
   )
 }

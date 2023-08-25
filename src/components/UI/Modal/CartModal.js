@@ -1,33 +1,31 @@
-import React, { Children } from 'react'
-import styles from './CartModal.module.scss'
-import Portal from '../Portal/Portal'
+import React from 'react';
+import styles from './CartModal.module.scss';
 
+import Portal from '../Portal/Portal';
 
-const Backdrop= ({onHide})=>{
-    return (
-        <div className={styles.backdrop} onClick={onHide}/>
-    )
-}
+const Backdrop = ({onClose}) => {
+  return <div className={styles.backdrop} onClick={onClose} />;
+};
 
-const ModalOverlay= ({children})=>{
-    return(
-        <div className={styles.modal}>
-            <div className={styles.content}>{children}</div>
-        </div>
-    )
-}
-
-const CartModal = ({children,onHide: onHide}) => {
+const ModalOverlay = ({ children }) => {
   return (
-<>
-    <Portal destId='backdrop-root'>
-    <Backdrop onHide={onHide}/>
-    </Portal>
-    <Portal destId='overlay-root'>
-    <ModalOverlay>{children}</ModalOverlay>
-    </Portal>
-</>
-  )
-}
+    <div className={styles.modal}>
+      <div className={styles.content}>{children}</div>
+    </div>
+  );
+};
 
-export default CartModal
+const CartModal = ({children, onClose}) => {
+  return (
+    <>
+      <Portal destId="backdrop-root">
+        <Backdrop onClose={onClose} />
+      </Portal>
+      <Portal destId="overlay-root">
+        <ModalOverlay>{children}</ModalOverlay>
+      </Portal>
+    </>
+  );
+};
+
+export default CartModal;

@@ -1,43 +1,57 @@
-import React from 'react'
-import CartModal from '../../UI/Modal/CartModal'
-import styles from './Cart.module.scss'
+import React, { useContext } from 'react';
+import CartModal from '../../UI/Modal/CartModal';
+import styles from './Cart.module.scss';
+import CartContext from '../../../store/cart-context';
+import CartItem from './CartItem';
 
-const DUMMY_CART=[
-    {
-        id:'c1',
-        name:'스시',
-        amount:2,
-        price:46000
-    },
-    {
-        id:'c2',
-        name:'띠드버거',
-        amount:1,
-        price:12000
-    }
-]
-const {'cart-items':cartItemStyle,total,actions,'button--alt':btnAlt,button} = styles;
+const DUMMY_CART = [
+  {
+    id: 'c1',
+    name: '스시',
+    amount: 2,
+    price: 46000,
+  },
+  {
+    id: 'c2',
+    name: '띠드버거',
+    amount: 1,
+    price: 12000,
+  },
+];
+const Cart = ({onClose}) => {
+  const {
+    'cart-items': cartItemStyle,
+    total,
+    actions,
+    'button--alt': btnAlt,
+    button,
+  } = styles;
 
-const Cart = ({onHide}) => {
+  const { items, totalPrice } = useContext(CartContext);
+
+  console.log(items);
+
   return (
-    <CartModal onHide={onHide}>
-<ul className={cartItemStyle}>
-        {
-            DUMMY_CART.map(cartItem=>(
-                <li key={cartItem.id}>{cartItem.name}</li>
-            ))
-        }
-       </ul> 
-        <div className={total}>
+    <CartModal onClose={onClose}>
+      {/* 주문 내역 */}
+      <ul className={cartItemStyle}>
+        {items.map((cartItem) => (
+          <CartItem 
+            key={cartItem.id}
+            cart={cartItem}
+          />
+        ))}
+      </ul>
+      <div className={total}>
         <span>주문 총액</span>
-        <span>58,000원</span>
+        <span>{new Intl.NumberFormat('ko-KR').format(totalPrice)}원</span>
       </div>
       <div className={actions}>
-        <button className={btnAlt} onClick={onHide}>닫기</button>
+        <button className={btnAlt} onClick={onClose}>닫기</button>
         <button className={button}>주문</button>
       </div>
     </CartModal>
-  )
-}
+  );
+};
 
-export default Cart
+export default Cart;
